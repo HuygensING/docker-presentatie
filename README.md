@@ -25,7 +25,13 @@ docker run -it busybox sh
 
 Dit model is enorm veel simpeler dan background processen. Vergelijk scripts met background processen vs foreground processen met programmeren met async threads of sync calls. Alleen dan met de toevoeging dat bash 0 ondersteuning heeft (while loops met sleeps die wachten op output enzo)
 
-## 2. process management zo goed als systemd (en simpeler)
+```
+docker run -itd --name duurt_lang busybox sleep 10
+docker attach duurt_lang
+```
+
+## 2. process management
+
 ```
 docker run -d --restart=always --name crashingbackgroundprocess  busybox sh -c 'echo foo && sleep 2'
 docker logs --tail crashingbackgroundprocess
@@ -33,6 +39,8 @@ docker logs --tail crashingbackgroundprocess | wc -l
 # wacht even...
 docker logs --tail crashingbackgroundprocess | wc -l
 ```
+
+na een keer of 10 wil hij niet meer herstarten :( Ik weet niet of dat een bug is of by design en ook niet of de bug in de mac-docker schil of echte docker zit.
 
 ## 3. meer configuratie buiten de app
 In plaats van iedere app zijn eigen poortconfiguratie te laten hebben denkt de app gewoon dat hij op 80 zit en expose je wat je wil exposen
@@ -45,7 +53,7 @@ docker run -p 8080:80 nginx
 Naast de applicatie die draait houdt docker ook een filesystem bij. De grote truc is dat je die filesystems kan snapshotten en dat je op een snapshot door kan werken via een copy-on-write systeem. Van origine gebruikten ze hier AUFS voor maar er is vrij veel innovatie in dit gedeelte van docker. De lagen en de snapshots zorgen ervoor dat docker zo populair is geworden.
 
 ```
-docker run -it —name firstbusybox busybox sh
+docker run -it --name firstbusybox busybox sh
 touch foo
 <ctrl-d>
 docker run -it busybox sh
@@ -71,14 +79,14 @@ Zie bijvoorbeeld:
  - autoscaler: http://kubernetes.io/docs/hellonode/
  - Snel een tooltje testen: Stel je wil is kijken of de app [upsource](https://www.jetbrains.com/upsource/) wat is:
    1. https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=1&q=upsource&starCount=0
-   1. `docker create --name upsource -p 8080:8080 --restart=always esycat/upsource`
+   1. `docker run -p 8080:8080 esycat/upsource`
    1. Speel ermee
    1. Wil je hem op een server?
      1. Vind een leuke docker cloud (ik gebruik rackspace Carina, want gratisch) 
-     1. Switch naar de docker cloud instance zet wat environment variables
+     1. Switch naar de docker cloud instance door wat environment variables in te stellen (docker daemon is een HTTP server)
        `Source ~/Downloads/test/test.env`
    1. Zelfde commando nog een keer:
-      `docker create --name upsource -p 82:8080 --restart=always esycat/upsource`
+      `docker run --name upsource -p 82:8080 --restart=always esycat/upsource`
    1. Ga naar de url op internet! (voor de demo http://146.20.68.219:82 )
    1. In plaats van een kapotte pc heb je alles schoon en productieklaar
 
