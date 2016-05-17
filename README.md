@@ -26,7 +26,7 @@ docker run -it busybox sh
 Dit model is enorm veel simpeler dan background processen. Vergelijk scripts met background processen vs foreground processen met programmeren met async threads of sync calls. Alleen dan met de toevoeging dat bash 0 ondersteuning heeft (while loops met sleeps die wachten op output enzo)
 
 ```
-docker run -itd --name duurt_lang busybox sleep 10
+docker run -d --name duurt_lang busybox sleep 10
 docker attach duurt_lang
 ```
 
