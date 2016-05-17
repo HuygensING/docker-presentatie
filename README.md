@@ -64,10 +64,12 @@ Zie bijvoorbeeld:
 
 ## Wat kan ik dan?
 
- - Docker als pre-push hook: https://github.com/HuygensING/timbuctoo/blob/develop/timbuctoo-instancev4/pre-push
- - Docker als clean database store: commit je database changes en start steeds een nieuwe container vanaf een known image
- - Docker als autoscaler: http://kubernetes.io/docs/hellonode/
- - Docker als snelle tester: Stel je wil is kijken of de app [upsource](https://www.jetbrains.com/upsource/) wat is:
+ - Distributie die mensen kunnen vertrouwen
+ - Lokaal de serveromstandigheden reproduceren
+ - pre-push hook: https://github.com/HuygensING/timbuctoo/blob/develop/timbuctoo-instancev4/pre-push
+ - clean database store: commit je database changes en start steeds een nieuwe container vanaf een known image
+ - autoscaler: http://kubernetes.io/docs/hellonode/
+ - Snel een tooltje testen: Stel je wil is kijken of de app [upsource](https://www.jetbrains.com/upsource/) wat is:
    1. https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=1&q=upsource&starCount=0
    1. `docker create --name upsource -p 8080:8080 --restart=always esycat/upsource`
    1. Speel ermee
