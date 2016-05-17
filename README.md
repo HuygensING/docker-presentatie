@@ -79,14 +79,14 @@ Zie bijvoorbeeld:
  - autoscaler: http://kubernetes.io/docs/hellonode/
  - Snel een tooltje testen: Stel je wil is kijken of de app [upsource](https://www.jetbrains.com/upsource/) wat is:
    1. https://hub.docker.com/search/?isAutomated=0&isOfficial=0&page=1&pullCount=1&q=upsource&starCount=0
-   1. `docker run -p 8080:8080 esycat/upsource`
+   1. `docker run -p -it 8080:8080 esycat/upsource`
    1. Speel ermee
    1. Wil je hem op een server?
      1. Vind een leuke docker cloud (ik gebruik rackspace Carina, want gratisch) 
      1. Switch naar de docker cloud instance door wat environment variables in te stellen (docker daemon is een HTTP server)
        `Source ~/Downloads/test/test.env`
    1. Zelfde commando nog een keer:
-      `docker run --name upsource -p 82:8080 --restart=always esycat/upsource`
+      `docker run -d --name upsource -p 82:8080 --restart=always esycat/upsource`
    1. Ga naar de url op internet! (voor de demo http://146.20.68.219:82 )
    1. In plaats van een kapotte pc heb je alles schoon en productieklaar
 
