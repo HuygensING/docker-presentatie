@@ -92,7 +92,7 @@ Zie bijvoorbeeld:
 
 # Dingen om op te letten:
 
-- Docker op de mac (gebruik de private beta)
+- Docker op de mac (gebruik de private beta want filesystem mappings werken heel slecht onder de huidige versie)
 - Doe een rm -v of  docker volume ls -qf dangling=true
 - Docker-compose https://docs.docker.com/compose/overview/
 - Antipatterns die ik ben tegengekomen
